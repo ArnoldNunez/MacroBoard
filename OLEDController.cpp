@@ -30,26 +30,34 @@ void OLEDController::setup()
 }
 
 //-----
-void OLEDController::render()
+void OLEDController::render(const std::vector<KeySwitch*>& state)
 {
    mDisplay.clearDisplay();
    mDisplay.setCursor(0, 0);
    mDisplay.println("* Adafruit Macropad *");
 
+   drawKeypadState(state);
+
    mDisplay.display();
 }
 
-// //-----
-// void OLEDController::drawKeypadState(const std::vector<KeySwitch*> state)
-// {
-//    for (const auto& switchState : state)
-//    {
-//       if (switchState->isPressed())
-//       {
-//          unsigned short i = switchState->getId();
-//          mDisplay.setCursor(((i-1) % 3)*48, 32 + ((i-1)/3)*8);
-//          mDisplay.print("KEY");
-//          mDisplay.print(i);
-//       }
-//    }
-// }
+//-----
+void OLEDController::drawKeypadState(const std::vector<KeySwitch*> state)
+{
+   for (const auto& switchState : state)
+   {
+      if (switchState->isPressed())
+      {
+         mDisplay.setTextColor(SH110X_BLACK, SH110X_WHITE);
+      }
+      else
+      {
+         mDisplay.setTextColor(SH110X_WHITE, SH110X_BLACK);
+      }
+
+      unsigned short i = switchState->getId();
+      mDisplay.setCursor(((i-1) % 3)*48, 32 + ((i-1)/3)*8);
+      mDisplay.print("KEY");
+      mDisplay.print(i);
+   }
+}

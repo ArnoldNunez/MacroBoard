@@ -4,11 +4,8 @@
  * Date: 7/13/2024
  */
 
- #ifndef KEY_SWITCH_H
- #define KEY_SWITCH_H
-
- #include "Context.h"
- #include "OLEDController.h"
+#ifndef KEY_SWITCH_H
+#define KEY_SWITCH_H
 
 /**
  * Class representing the main application processing.

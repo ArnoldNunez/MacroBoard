@@ -11,6 +11,8 @@
 //-----
 KeypadController::KeypadController() 
    : mNumSwitches(12),
+     mColorPressed(0xFFFFFF), // Color white
+     mColorReleased(0x000000), // Off
      mKeyMatrix(),
      mPixelMatrix(NUM_NEOPIXEL, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800)
 {
@@ -47,9 +49,17 @@ void KeypadController::process()
    {
       if (key->isPressed())
       {
-         
+         // Make LED White
+         mPixelMatrix.setPixelColor(key->getId() - 1, mColorPressed);
+      }
+      else
+      {
+         mPixelMatrix.setPixelColor(key->getId() - 1, mColorReleased);
       }
    }
+
+   // Show neopixels
+   mPixelMatrix.show();
 }
 
 //-----

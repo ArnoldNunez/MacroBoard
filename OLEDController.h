@@ -40,17 +40,20 @@ public:
 
   /**
    * The OLED render loop 
+   * \param state The keypad state
    */
-  void render();
+  void render(const std::vector<KeySwitch*>& state);
 
-  /**
-   * Draw the keypad state onto the OLED
-   */
-  // void drawKeypadState(const std::vector<KeySwitch*> state);
+
 
 private:
    // The display instance
    Adafruit_SH1106G mDisplay;
+
+  /**
+   * Draw the keypad state onto the OLED
+   */
+  void drawKeypadState(const std::vector<KeySwitch*> state);
 };
 
 #endif // OLED_CONTROLLER_H

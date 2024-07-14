@@ -55,11 +55,12 @@ void AppProcess::setup()
 
 void AppProcess::applicationLoop()
 {
-  // Render OLED updates
-  mOledController->render();
-
   // Update keypad state
   mKeypadController->process();
+  std::vector<KeySwitch*> keyState = mKeypadController->getState();
+
+  // Render OLED updates
+  mOledController->render(keyState);
 
   // Update OLED based on keypad state
   // mOledController->drawKeypadState(mKeypadController->getState());

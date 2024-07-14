@@ -58,6 +58,12 @@ private:
   // The number of switches on the keypad
   int mNumSwitches;
 
+  // Color for a pressed keyswitch
+  int mColorPressed;
+
+  // Color for a released keyswitch
+  int mColorReleased;
+
   // The list of keys available.
   std::vector<KeySwitch*> mKeyMatrix;
 

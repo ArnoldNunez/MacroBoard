@@ -5,6 +5,8 @@
  */
 
  #include "KeySwitch.h"
+ 
+ #include <Wire.h>
 
 //-----
 KeySwitch::KeySwitch(unsigned short pin) 
