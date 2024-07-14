@@ -7,13 +7,34 @@
  #include "KeySwitch.h"
 
 //-----
- KeySwitch::KeySwitch()
- {
+KeySwitch::KeySwitch(unsigned short pin) 
+: mId(pin),
+  mPin(pin)
+{
+}
 
- }
+//-----
+KeySwitch::~KeySwitch()
+{
+}
 
- //-----
- KeySwitch::~KeySwitch()
- {
+//-----
+void KeySwitch::enableInput()
+{
+    pinMode(mPin, INPUT_PULLUP);
+}
 
- }
+//-----
+bool KeySwitch::isPressed() const
+{
+    // Since we are input pullup mode, the switch is HIGH
+    // when not pressed and LOW when pressed. therefore we
+    // negate the output of digitalRead()
+    return !digitalRead(mPin);
+}
+
+//-----
+unsigned short KeySwitch::getId() const
+{
+    return mId;
+}

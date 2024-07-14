@@ -31,11 +31,36 @@ void AppProcess::setup()
 
     Serial.println("Adafruit Macropad with RP2040");
 
-    // Start pixels!
+    // Start pixels
     mKeypadController = std::make_unique<KeypadController>();
     mKeypadController->initializeLEDs();
+
+    // Start OLED
+    mOledController = std::make_unique<OLEDController>(128, 64);
+    mOledController->setup();
+
+    // Start Rotary Encoder
+    mRotEncoderController = std::make_unique<RotEncoderController>(PIN_ROTA, PIN_ROTB);
+
+    // Start speaker
+    mSpeakerController = std::make_unique<SpeakerController>(PIN_SPEAKER);
+
+
+    // Play setup tune
+    mSpeakerController->playTone(988, 100);
+    delay(200);
+    mSpeakerController->playTone(1319, 200);
+    delay(200);
 }
 
 void AppProcess::applicationLoop()
 {
+  // Render OLED updates
+  mOledController->render();
+
+  // Update keypad state
+  mKeypadController->process();
+
+  // Update OLED based on keypad state
+  // mOledController->drawKeypadState(mKeypadController->getState());
 }

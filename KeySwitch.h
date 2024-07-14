@@ -18,8 +18,9 @@ class KeySwitch
 public:
   /**
    * Constructor
+   * \param pin Pin associated with the keyswitch
    */
-  KeySwitch();
+  KeySwitch(unsigned short pin);
 
   /**
    * Destructor
@@ -31,8 +32,28 @@ public:
    */
   KeySwitch(const KeySwitch&) = delete;
 
-private:
+  /**
+   * Enable switch input, INPUT_PULLUP mode.
+   */
+  void enableInput();
 
+  /**
+   * Check is switch is pressed
+   * \return True is pressed, false otherwise
+   */
+  bool isPressed() const;
+
+  /**
+   * Gets numerical id for the keyswitch
+   */
+  unsigned short getId() const;
+
+private:
+  // Id associated with the keyswitch
+  unsigned short mId;
+
+  // Pin associated with the keyswitch
+  unsigned short mPin;
 };
 
  #endif // KEY_SWITCH_H

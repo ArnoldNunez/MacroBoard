@@ -8,6 +8,9 @@
 #define OLED_CONTROLLER_H
 
 #include <Adafruit_SH110X.h>
+#include <vector>
+
+#include "KeySwitch.h"
 
 /**
  * Class used to control the macropad OLED controller.
@@ -29,6 +32,21 @@ public:
    * Copy constructor (disabled)
    */
   OLEDController(const OLEDController&) = delete;
+
+  /**
+   * Sets up the OLED display
+   */
+  void setup();
+
+  /**
+   * The OLED render loop 
+   */
+  void render();
+
+  /**
+   * Draw the keypad state onto the OLED
+   */
+  // void drawKeypadState(const std::vector<KeySwitch*> state);
 
 private:
    // The display instance

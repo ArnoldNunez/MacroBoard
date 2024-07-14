@@ -42,9 +42,24 @@ public:
   // void playTone(unsigned short frequency, unsigned long duration);
   void initializeLEDs();
 
+  /**
+   * main processing loop for keypad controll. Should
+   * be called periodically to process keypad state.
+   */
+  void process();
+
+  /**
+   * Gets the current state of the keypad.
+   * \return The keypad state.
+   */
+  std::vector<KeySwitch*> getState() const;
+
 private:
+  // The number of switches on the keypad
+  int mNumSwitches;
+
   // The list of keys available.
-  std::vector<KeySwitch> mKeyMatrix;
+  std::vector<KeySwitch*> mKeyMatrix;
 
   // The LED matrix
   Adafruit_NeoPixel mPixelMatrix;

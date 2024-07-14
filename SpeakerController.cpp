@@ -13,8 +13,11 @@ SpeakerController::SpeakerController(unsigned short speakerPin)
    : mSpeakerPin(speakerPin)
 {
    // Enable the speaker
+   pinMode(PIN_SPEAKER_ENABLE, OUTPUT);
+   digitalWrite(PIN_SPEAKER_ENABLE, HIGH);
+
    pinMode(mSpeakerPin, OUTPUT);
-   digitalWrite(mSpeakerPin, HIGH);
+   digitalWrite(mSpeakerPin, LOW);
 }
 
 //-----
@@ -25,10 +28,5 @@ SpeakerController::~SpeakerController()
 //-----
 void SpeakerController::playTone(unsigned short frequency, unsigned long duration)
 {
-   pinMode(PIN_SPEAKER, OUTPUT);
-   digitalWrite(PIN_SPEAKER, LOW);
-   tone(PIN_SPEAKER, 988, 100);  // tone1 - B5
-   delay(100);
-   tone(PIN_SPEAKER, 1319, 200); // tone2 - E6
-   delay(200);
+   tone(mSpeakerPin, frequency, duration);  // tone1 - B5
 }
