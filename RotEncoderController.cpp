@@ -23,6 +23,10 @@ void encoderInterrupt()
 RotEncoderController::RotEncoderController(unsigned short pin1, unsigned short pin2)
    : mPin1(pin1),
      mPin2(pin2),
+     mNewPos(0),
+     mOldPos(0),
+     mDirection(RotaryEncoder::Direction::NOROTATION),
+     mChanged(false),
      mEncoder(nullptr)
 {
    // Instantiate the library rotary encoder
@@ -44,4 +48,25 @@ RotEncoderController::RotEncoderController(unsigned short pin1, unsigned short p
 //-----
 RotEncoderController::~RotEncoderController()
 {
+}
+
+//-----
+void RotEncoderController::process()
+{
+   // Update underlying hardware encoder processing
+   mEncoder->tick();
+
+   // Update encoder state
+   int newPos = mEncoder->getPosition();
+   if (newPos != mNewPos)
+   {
+      mOldPos = mNewPos;
+      mNewPos = newPos;
+      mDirection = mEncoder->getDirection();
+      mChanged = true;
+   }
+   else
+   {
+      mChanged = false;
+   }
 }

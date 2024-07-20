@@ -32,6 +32,7 @@ void OLEDController::setup()
 //-----
 void OLEDController::render(const std::vector<KeySwitch*>& state)
 {
+   mDisplay.setTextColor(SH110X_WHITE, SH110X_BLACK);
    mDisplay.clearDisplay();
    mDisplay.setCursor(0, 0);
    mDisplay.println("* Adafruit Macropad *");

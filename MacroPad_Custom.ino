@@ -2,69 +2,20 @@
 #include <Adafruit_NeoPixel.h>
 #include <RotaryEncoder.h>
 #include <Wire.h>
+#include <RP2040USB.h>
+// #include <device/usbd.h>
+#include <tusb.h>
+
 
 #include "AppProcess.h"
-
-// // Create the neopixel strip with the built in definitions NUM_NEOPIXEL and PIN_NEOPIXEL
-// Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUM_NEOPIXEL, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
-
-// // Create the OLED display
-// Adafruit_SH1106G display = Adafruit_SH1106G(128, 64, &SPI1, OLED_DC, OLED_RST, OLED_CS);
-
-// // Create the rotary encoder
-// RotaryEncoder encoder(PIN_ROTA, PIN_ROTB, RotaryEncoder::LatchMode::FOUR3);
-// void checkPosition() {  encoder.tick(); } // just call tick() to check the state.
-// // our encoder position state
-// int encoder_pos = 0;
 
 AppProcess app;
 
 void setup() {
   app.setup();
-  // Serial.begin(115200);
-  // //while (!Serial) { delay(10); }     // wait till serial port is opened
-  // delay(100);  // RP2040 delay is not a bad idea
-
-  // Serial.println("Adafruit Macropad with RP2040");
-
-  // // start pixels!
-  // pixels.begin();
-  // pixels.setBrightness(255);
-  // pixels.show(); // Initialize all pixels to 'off'
-
-  // // Start OLED
-  // display.begin(0, true); // we dont use the i2c address but we will reset!
-  // display.display();
-  
-  // set all mechanical keys to inputs
-  for (uint8_t i=0; i<=12; i++) {
-    pinMode(i, INPUT_PULLUP);
-  }
-
-  // // set rotary encoder inputs and interrupts
-  // pinMode(PIN_ROTA, INPUT_PULLUP);
-  // pinMode(PIN_ROTB, INPUT_PULLUP);
-  // attachInterrupt(digitalPinToInterrupt(PIN_ROTA), checkPosition, CHANGE);
-  // attachInterrupt(digitalPinToInterrupt(PIN_ROTB), checkPosition, CHANGE);  
 
   // // We will use I2C for scanning the Stemma QT port
   // Wire.begin();
-
-  // // text display tests
-  // display.setTextSize(1);
-  // display.setTextWrap(false);
-  // display.setTextColor(SH110X_WHITE, SH110X_BLACK); // white text, black background
-
-  // // Enable speaker
-  // pinMode(PIN_SPEAKER_ENABLE, OUTPUT);
-  // digitalWrite(PIN_SPEAKER_ENABLE, HIGH);
-  // // Play some tones
-  // pinMode(PIN_SPEAKER, OUTPUT);
-  // digitalWrite(PIN_SPEAKER, LOW);
-  // tone(PIN_SPEAKER, 988, 100);  // tone1 - B5
-  // delay(100);
-  // tone(PIN_SPEAKER, 1319, 200); // tone2 - E6
-  // delay(200);
 }
 
 // uint8_t j = 0;
@@ -72,11 +23,6 @@ void setup() {
 
 void loop() {
   app.applicationLoop();
-
-  // display.clearDisplay();
-  // display.setCursor(0,0);
-  // display.println("* Adafruit Macropad *");
-  
   
   // // Encoder processing
   // encoder.tick();          // check the encoder
